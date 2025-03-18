@@ -78,19 +78,19 @@ namespace API1.Controllers
 
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument htmlDocument = web.Load($"https://coinmarketcap.com/currencies/{name}");
-                var price = htmlDocument.DocumentNode.SelectSingleNode("//section//div//span");
+                var price = htmlDocument.DocumentNode.SelectSingleNode("//*[@data-test='text-cdp-price-display']");
                 if (price != null)
                 {
                     return new { Name = name, Price = price.InnerText.Trim() };
                 }
                 else
                 {
-                    return "Price not found!";
+                    return new { Message = "Coin not found!" };
                 }
             }
             else
             {
-                return "Coin not found!";
+                return new { Message = "Empty coin name!" };
             }
         }
     }
