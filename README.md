@@ -1,6 +1,11 @@
 # CryptoPriceAPI
 This api, does webscraping on CoinDesk, getting all coins and their price.
 
+SWAGGER: 
+```
+http://localhost/swagger/
+```
+
 Api Docs
 #### Method: GET
 URL: 
