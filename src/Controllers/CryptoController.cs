@@ -1,4 +1,6 @@
-﻿using HtmlAgilityPack;
+﻿using System.Net;
+using HtmlAgilityPack;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,12 +24,14 @@ namespace API1.Controllers
         }
 
         // WebScraping starts here...
-        public static string[] GetAllCoins(string page)
+        public List<dynamic> GetAllCoins(string page)
         {
             HtmlWeb web = new HtmlWeb();
             HtmlDocument htmlDocument = web.Load($"https://coinmarketcap.com/?page={page}");
 
-            var results = new List<string>();
+            var coinNameList = new List<string>();
+            var coinPriceList = new List<string>();
+
             var coins = htmlDocument.DocumentNode.SelectNodes("//tr//p[contains(@class, 'coin-item-name')]");
             var prices = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-142c02c-0 lmjbLF')]//span");
             var singlePriceLink = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-4c05d6ef-0 bLqliP')]//a");
@@ -41,14 +45,21 @@ namespace API1.Controllers
 
                     var coinSinglePriceLink = $"https://coinmarketcap.com{singlePriceLink[i].GetAttributeValue("href", string.Empty)}";
 
-                    results.Add($"{coin.InnerText.Trim()} : Price {price.InnerText.Trim()} : {coinSinglePriceLink}");
+                    coinNameList.Add(coin.InnerText.Trim());
+                    coinPriceList.Add(price.InnerText.Trim());
                 }
 
-                return results.ToArray();
+                var combinedList = coinNameList.Zip(coinPriceList, (name, price) => new
+                {
+                    Coin = name,
+                    Price = price
+                }).ToList();
+
+                return combinedList.Cast<dynamic>().ToList();
             }
             else
             {
-                return new string[] { "Error on scraping, no data found!" };
+                return new List<object>() { new { Message = "Error on scraping, no data found!" } };
             }
         }
     }
