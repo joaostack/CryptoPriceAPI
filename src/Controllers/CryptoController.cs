@@ -78,7 +78,7 @@ namespace API1.Controllers
 
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument htmlDocument = web.Load($"https://coinmarketcap.com/currencies/{name}");
-                var price = htmlDocument.DocumentNode.SelectSingleNode("//div[@class='section-coin-overview']//span");
+                var price = htmlDocument.DocumentNode.SelectSingleNode("//section//span");
                 if (price != null)
                 {
                     return new { Name = name, Price = price.InnerText.Trim() };
