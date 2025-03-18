@@ -29,7 +29,7 @@ namespace API1.Controllers
 
             var results = new List<string>();
             var coins = htmlDocument.DocumentNode.SelectNodes("//tr//p[contains(@class, 'coin-item-name')]");
-            var prices = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-b3fc6b7-0 dzgUIj')]//span");
+            var prices = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-142c02c-0 lmjbLF')]//span");
             var singlePriceLink = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-4c05d6ef-0 bLqliP')]//a");
 
             if (coins != null && prices != null)
