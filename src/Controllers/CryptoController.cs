@@ -24,7 +24,7 @@ namespace API1.Controllers
         }
 
         // WebScraping starts here...
-        public List<dynamic> GetAllCoins(string page)
+        public static List<dynamic> GetAllCoins(string page)
         {
             HtmlWeb web = new HtmlWeb();
             HtmlDocument htmlDocument = web.Load($"https://coinmarketcap.com/?page={page}");
