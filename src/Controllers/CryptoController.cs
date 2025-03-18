@@ -32,12 +32,13 @@ namespace API1.Controllers
             var prices = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-b3fc6b7-0 dzgUIj')]//span");
             var singlePriceLink = htmlDocument.DocumentNode.SelectNodes("//td//div[contains(@class, 'sc-4c05d6ef-0 bLqliP')]//a");
 
-            if (coins != null)
+            if (coins != null && prices != null)
             {
                 for (int i = 0; i < coins.Count; i++)
                 {
                     var coin = coins[i];
                     var price = prices[i];
+
                     var coinSinglePriceLink = $"https://coinmarketcap.com{singlePriceLink[i].GetAttributeValue("href", string.Empty)}";
 
                     results.Add($"{coin.InnerText.Trim()} : Price {price.InnerText.Trim()} : {coinSinglePriceLink}");
@@ -47,7 +48,7 @@ namespace API1.Controllers
             }
             else
             {
-                return new string[] { "No results Found!" };
+                return new string[] { "Error on scraping, no data found!" };
             }
         }
     }
