@@ -20,3 +20,7 @@ Ex 2:
 ```
 http://localhost/api/coins/2
 ```
+#### GET single coin price
+```
+http://localhost/api/coin/bitcoin
+```
