@@ -16,7 +16,19 @@ Ex:
 ```
 http://localhost/api/coins/1
 ```
-Ex 2: 
 ```
 http://localhost/api/coins/2
+```
+
+#### Method: GET
+URL: 
+```
+http://localhost/api/coin/COIN_NAME
+```
+Ex:
+```
+http://localhost/api/coin/bitcoin
+```
+```
+http://localhost/api/coin/ethereum
 ```
