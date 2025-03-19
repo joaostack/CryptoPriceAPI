@@ -24,3 +24,6 @@ http://localhost/api/coins/2
 ```
 http://localhost/api/coin/bitcoin
 ```
+```
+http://localhost/api/coin/ethereum
+```
