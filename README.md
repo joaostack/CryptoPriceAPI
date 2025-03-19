@@ -20,7 +20,13 @@ Ex 2:
 ```
 http://localhost/api/coins/2
 ```
-#### GET single coin price
+
+#### Method: GET
+URL: 
+```
+http://localhost/api/coin/COIN_NAME
+```
+Ex:
 ```
 http://localhost/api/coin/bitcoin
 ```
