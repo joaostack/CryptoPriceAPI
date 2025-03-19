@@ -10,6 +10,8 @@ namespace API1.Controllers
     [Route("api")]
     public class CryptoController : ControllerBase
     {
+        private static HtmlWeb _web = new HtmlWeb();
+
         [HttpGet("coins/{page}")]
         public IActionResult GetAll(string page)
         {
@@ -33,8 +35,7 @@ namespace API1.Controllers
         // WebScraping starts here...
         public static List<dynamic> GetAllCoins(string page)
         {
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument htmlDocument = web.Load($"https://coinmarketcap.com/?page={page}");
+            HtmlDocument htmlDocument = _web.Load($"https://coinmarketcap.com/?page={page}");
 
             var coinNameList = new List<string>();
             var coinPriceList = new List<string>();
@@ -76,8 +77,7 @@ namespace API1.Controllers
             {
                 name = name.Trim().ToLower();
 
-                HtmlWeb web = new HtmlWeb();
-                HtmlDocument htmlDocument = web.Load($"https://coinmarketcap.com/currencies/{name}");
+                HtmlDocument htmlDocument = _web.Load($"https://coinmarketcap.com/currencies/{name}");
                 var price = htmlDocument.DocumentNode.SelectSingleNode("//*[@data-test='text-cdp-price-display']");
                 if (price != null)
                 {
