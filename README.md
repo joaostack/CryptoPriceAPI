@@ -16,7 +16,6 @@ Ex:
 ```
 http://localhost/api/coins/1
 ```
-Ex 2: 
 ```
 http://localhost/api/coins/2
 ```
